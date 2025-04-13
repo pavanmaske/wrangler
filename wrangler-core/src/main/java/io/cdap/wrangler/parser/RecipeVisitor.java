@@ -326,4 +326,30 @@ public final class RecipeVisitor extends DirectivesBaseVisitor<RecipeSymbol.Buil
     int column = ctx.getStart().getCharPositionInLine();
     return new SourceInfo(lineno, column, text);
   }
+
+  /**
+   * A Directive can include values that represent various data types such as byte sizes
+   * (e.g., "10KB", "1.5MB") or time durations (e.g., "500ms", "2s"). This visitor method
+   * extracts such values when matched as BYTE_SIZE or TIME_DURATION tokens and creates
+   * appropriate token types <code>ByteSize</code> or <code>TimeDuration</code> to be added
+   * to the <code>TokenGroup</code>.
+   *
+   * These tokens are later used in directive implementations (e.g., aggregate-stats) for
+   * computing values in canonical units (bytes, milliseconds, etc.).
+   */
+  @Override
+  public RecipeSymbol.Builder visitValue(DirectivesParser.ValueContext ctx) {
+    if (ctx.BYTE_SIZE() != null) {
+      builder.addToken(new io.cdap.wrangler.api.parser.ByteSize(ctx.getText()));
+      return builder;
+    }
+
+    if (ctx.TIME_DURATION() != null) {
+      builder.addToken(new io.cdap.wrangler.api.parser.TimeDuration(ctx.getText()));
+      return builder;
+    }
+
+    return super.visitValue(ctx); // fallback
+  }
+
 }
