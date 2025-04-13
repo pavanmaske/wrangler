@@ -1,0 +1,32 @@
+# Prompts Used for Wrangler Assignment Implementation
+
+## Initial Setup & Understanding
+1. "Explain the structure of CDAP Wrangler's directive system and how new parsers can be integrated"
+2. "What are the key components needed to implement a new token type in ANTLR grammar for Wrangler?"
+3. "Show me an example of implementing a custom token parser in Java similar to Wrangler's existing implementations"
+
+## Grammar Implementation (Part 3a)
+4. "Help me design ANTLR lexer rules for byte size units (KB, MB, GB) and time durations (ms, s, m)"
+5. "How should I structure the parser rules to handle both simple values and unit values in Wrangler's grammar?"
+6. "What's the proper way to regenerate the ANTLR Java parser after modifying Directives.g4?"
+
+## API Implementation (Part 3b)
+7. "Create a Java class for parsing byte size values with units (like 10MB) similar to Wrangler's Token system"
+8. "Implement a TimeDuration parser class that handles conversions between ns, ms, seconds, etc."
+9. "How should I integrate new token types into Wrangler's existing TokenType enum and validation system?"
+
+## Core Parser Updates (Part 3c)
+10. "Show me how to modify Wrangler's DirectiveVisitor to handle new byte size and time duration tokens"
+11. "Implement argument validation for the new token types in Wrangler's RecipeCompiler"
+12. "How should I update the ExecutorContext to support aggregation of the new value types?"
+
+## Directive Implementation (Part 3d)
+13. "Create an aggregate directive implementation that sums byte sizes and time durations with unit conversion"
+14. "Implement proper store handling for aggregation across multiple execute() calls in a Wrangler directive"
+15. "How to handle unit conversion in the finalize method of an aggregate directive?"
+
+## Testing (Part 3e)
+16. "Write comprehensive unit tests for ByteSize and TimeDuration parser classes"
+17. "Create test cases for the aggregate-stats directive covering edge cases and unit conversions"
+18. "Implement integration tests that verify the directive works in a pipeline with other Wrangler operations"
+
