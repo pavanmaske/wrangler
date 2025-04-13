@@ -84,4 +84,28 @@ public final class RecipeCompiler implements Compiler {
       throw new CompileException("Issue in compiling directives");
     }
   }
+  private void validateArguments(UsageDefinition definition, TokenGroup arguments) 
+  throws DirectiveParseException {
+  
+  // ... existing validation logic ...
+
+  for (int i = 0; i < definition.getTypes().size(); i++) {
+      TokenType expected = definition.getTypes().get(i);
+      TokenType actual = arguments.get(i).getType();
+
+      // Add validation for new types
+      if (expected == TokenType.BYTE_SIZE && actual != TokenType.BYTE_SIZE) {
+          throw new DirectiveParseException(
+              String.format("Expected byte size but found '%s'", actual));
+      }
+
+      if (expected == TokenType.TIME_DURATION && actual != TokenType.TIME_DURATION) {
+          throw new DirectiveParseException(
+              String.format("Expected time duration but found '%s'", actual));
+      }
+
+      // ... rest of validation ...
+  }
+}
+
 }

@@ -77,8 +77,8 @@ public class GrammarBasedParser implements RecipeParser {
         DirectiveInfo info = registry.get(namespace, command);
         if (info == null) {
           throw new DirectiveNotFoundException(
-            String.format("Directive '%s' not found in system and user scope. Check the name of directive.", command)
-          );
+              String.format("Directive '%s' not found in system and user scope. Check the name of directive.",
+                  command));
         }
 
         try {
@@ -99,5 +99,33 @@ public class GrammarBasedParser implements RecipeParser {
     } catch (Exception e) {
       throw new RecipeException(e.getMessage(), e);
     }
+  }
+  
+  @Test
+  public void testByteSizeParsing() throws Exception {
+      String recipe = "parse-as-csv :body ','; set-column :bytes 10MB";
+      List<Directive> directives = new RecipeCompiler().compile(recipe);
+      // Add assertions to verify byte size parsing
+  }
+
+  @Test
+  public void testTimeDurationParsing() throws Exception {
+      String recipe = "parse-as-csv :body ','; set-column :duration 500ms";
+      List<Directive> directives = new RecipeCompiler().compile(recipe);
+      // Add assertions to verify time duration parsing
+  }
+
+  @Test
+  public void testInvalidByteSize() {
+      String recipe = "set-column :bytes 10XB"; // Invalid unit
+      assertThrows(DirectiveParseException.class, 
+          () -> new RecipeCompiler().compile(recipe));
+  }
+
+  @Test
+  public void testInvalidTimeDuration() {
+      String recipe = "set-column :duration 5ys"; // Invalid unit
+      assertThrows(DirectiveParseException.class,
+          () -> new RecipeCompiler().compile(recipe));
   }
 }

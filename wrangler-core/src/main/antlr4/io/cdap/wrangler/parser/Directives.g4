@@ -139,8 +139,11 @@ numberRange
  : Number ':' Number '=' value
  ;
 
+/*Added BYTE_SIZE and TIME_DURATION to accept BYTE_SIZE 
+and TIME_DURATION tokens where appropriate for directive arguments.
+*/
 value
- : String | Number | Column | Bool
+ : String | Number | Column | Bool | BYTE_SIZE| TIME_DURATION
  ;
 
 ecommand
@@ -311,3 +314,10 @@ fragment Int
 fragment Digit
  : [0-9]
  ;
+
+// Lexer rules for BYTE_SIZE and TIME_DURATION
+BYTE_UNIT     : ('B' | 'KB' | 'MB' | 'GB' | 'TB');
+TIME_UNIT     : ('ms' | 's' | 'm' | 'h');
+BYTE_SIZE     : Digit+ ('.' Digit+)? BYTE_UNIT;
+TIME_DURATION : Digit+ ('.' Digit+)? TIME_UNIT;
+

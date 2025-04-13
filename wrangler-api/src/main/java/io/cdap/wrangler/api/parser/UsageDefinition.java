@@ -241,4 +241,15 @@ public final class UsageDefinition implements Serializable {
       return new UsageDefinition(directive, optionalCnt, tokens);
     }
   }
+  public static UsageDefinition.Builder byteSize(String name) {
+    return new Builder(name, TokenType.BYTE_SIZE);
+}
+
+/**
+ * Creates a usage definition that expects a time duration argument.
+ */
+public static UsageDefinition.Builder timeDuration(String name) {
+    return new Builder(name, TokenType.TIME_DURATION);
+}
+
 }

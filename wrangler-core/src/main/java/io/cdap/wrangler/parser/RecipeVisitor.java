@@ -349,7 +349,7 @@ public final class RecipeVisitor extends DirectivesBaseVisitor<RecipeSymbol.Buil
       return builder;
     }
 
-    return super.visitValue(ctx); // fallback
+     return super.visitValue(ctx); // fallback
   }
 
 }

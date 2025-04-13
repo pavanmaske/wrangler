@@ -63,4 +63,15 @@ public final class ErrorRecordCollector {
   public List<ErrorRecord> get() {
     return errors;
   }
+
+  public Store<Long> getByteSizeStore(String name) {
+    return getStore(name, Long.class);
+}
+
+/**
+ * Gets a store for accumulating time duration values
+ */
+public Store<Long> getTimeDurationStore(String name) {
+    return getStore(name, Long.class);
+}
 }

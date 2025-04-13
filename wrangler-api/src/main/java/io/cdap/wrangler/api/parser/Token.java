@@ -48,7 +48,10 @@ public interface Token extends Serializable {
    * @return {@code TokenType} of the implementation object.
    */
   TokenType type();
-
+  public enum TokenType {
+    BYTE_SIZE,
+    TIME_DURATION
+  }
   /**
    * The class implementing this interface will return the {@code JsonElement}
    * instance including the values of the object.
@@ -57,3 +60,4 @@ public interface Token extends Serializable {
    */
   JsonElement toJson();
 }
+

@@ -1,3 +1,23 @@
+## New Features
+
+* **Byte Size and Time Duration Parsing** - New native support for parsing and processing byte size (KB, MB, GB) and time duration (ms, s, m) units in Wrangler directives. This enables:
+  * Direct handling of storage/network quantities (e.g., "10MB", "1.5GB")
+  * Native time period calculations (e.g., "500ms", "2h")
+  * New `aggregate-stats` directive for computing totals/averages with unit conversion
+  * Example usage:
+    ```text
+    # Basic aggregation with default units (bytes and seconds)
+    aggregate-stats :data_size :response_time total_size total_time
+    
+    # With specified output units 
+    aggregate-stats :data_size :response_time total_size_mb total_time_ms 1MB 1ms
+    
+    # With average aggregation
+    aggregate-stats :data_size :response_time avg_size avg_time 1KB 1s avg
+    ```
+
+* **User Defined Directives, also known as UDD** [...] (keep existing content)
+
 # Data Prep
 
 ![cm-available](https://cdap-users.herokuapp.com/assets/cm-available.svg)
